@@ -41,24 +41,32 @@ apply = ["defer"]
 github = "MichaelAquilina/zsh-auto-notify"
 apply = ["defer"]
 
-[plugins.zsh-abbr]
-github = "olets/zsh-abbr"
+[plugins.zsh-abbrev-alias]
+github = "momo-lab/zsh-abbrev-alias"
 apply = ["defer"]
 
 
 [plugins.clipcopy]
 remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/lib/clipboard.zsh"
-[plugins.copyfile]
+apply = ["defer"]
 
+[plugins.copyfile]
 remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/copyfile/copyfile.plugin.zsh"
+apply = ["defer"]
 
 [plugins.copybuffer]
 remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/copybuffer/copybuffer.plugin.zsh"
+apply = ["defer"]
 
 [plugins.copypath]
 remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/copypath/copypath.plugin.zsh"
+apply = ["defer"]
+
+[plugins.command-not-found]
+remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/command-not-found/command-not-found.plugin.zsh"
+apply = ["defer"]
 
 [plugins.local-settings]
 local = "~/dotfiles/zsh/zsh_settings"
-apply = ["source"]
+apply = ["defer"]
  
