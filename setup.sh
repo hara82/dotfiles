@@ -63,15 +63,57 @@ remove_symlinks() {
     echo "All symbolic links have been removed."
 }
 
+# Function to install Homebrew on Linux
+setup_homebrew() {
+    echo "Setting up Homebrew..."
+
+    # Check if Homebrew is already installed
+    if command -v brew &> /dev/null; then
+        echo "Homebrew is already installed."
+    else
+        echo "Homebrew is not installed. Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
+    # Add Homebrew to the PATH
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    echo "Homebrew setup is complete."
+}
+
+# Function to install programs using Brewfile
+install_brewfile_packages() {
+    echo "Installing packages from Brewfile..."
+
+    if [ -f "$DOTFILES_DIR/homebrew/Brewfile" ]; then
+        brew bundle --file="$DOTFILES_DIR/homebrew/Brewfile"
+        echo "Brewfile packages installation is complete."
+    else
+        echo "Brewfile not found at $DOTFILES_DIR/homebrew/Brewfile."
+        exit 1
+    fi
+}
+
 # Handle script options
 case "$1" in
+    --install-homebrew)
+        setup_homebrew
+        ;;
+    --install-packages)
+        install_brewfile_packages
+        ;;
     --link)
         create_symlinks
         ;;
     --unlink)
         remove_symlinks
         ;;
+    --all)
+        remove_symlinks
+        create_symlinks
+        setup_homebrew
+        install_brewfile_packages
+        ;;
     *)
-        echo "Usage: $0 --link | --unlink"
+        echo "Usage: $0 --link | --unlink | --install-homebrew | --install-packages | --all"
         ;;
 esac
