@@ -1,0 +1,4 @@
+[include]
+    path = ~/dotfiles/git/user.conf
+[core]
+	editor = vim
