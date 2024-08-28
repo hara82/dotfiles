@@ -15,6 +15,10 @@ create_symlinks() {
     ln -sf "$DOTFILES_DIR/wezterm/wezterm.lua" "$CONFIG_DIR/wezterm/wezterm.lua"
     echo "Created link: $CONFIG_DIR/wezterm/wezterm.lua -> $DOTFILES_DIR/wezterm/wezterm.lua"
 
+    mkdir -p "$CONFIG_DIR/sheldon"
+    ln -sf "$DOTFILES_DIR/sheldon/plugins.toml" "$CONFIG_DIR/sheldon/plugins.toml"
+    echo "Created link: $CONFIG_DIR/sheldon/plugins.toml -> $DOTFILES_DIR/sheldon/plugins.toml"
+
     ln -sf "$DOTFILES_DIR/starship/starship.toml" "$CONFIG_DIR/starship.toml"
     echo "Created link: $CONFIG_DIR/starship.toml -> $DOTFILES_DIR/starship/starship.toml"
 
@@ -38,6 +42,11 @@ remove_symlinks() {
     if [ -L "$CONFIG_DIR/wezterm/wezterm.lua" ]; then
         unlink "$CONFIG_DIR/wezterm/wezterm.lua"
         echo "Removed link: $CONFIG_DIR/wezterm/wezterm.lua"
+    fi
+
+    if [ -L "$CONFIG_DIR/sheldon/plugins.toml" ]; then
+        unlink "$CONFIG_DIR/sheldon/plugins.toml"
+        echo "Removed link: $CONFIG_DIR/sheldon/plugins.toml"
     fi
 
     if [ -L "$CONFIG_DIR/starship.toml" ]; then
