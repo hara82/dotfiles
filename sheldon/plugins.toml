@@ -1,0 +1,60 @@
+# `sheldon` configuration file
+# ----------------------------
+#
+# You can modify this file directly or you can use one of the following
+# `sheldon` commands which are provided to assist in editing the config file:
+#
+# - `sheldon add` to add a new plugin to the config file
+# - `sheldon edit` to open up the config file in the default editor
+# - `sheldon remove` to remove a plugin from the config file
+#
+# See the documentation for more https://github.com/rossmacarthur/sheldon#readme
+
+shell = "zsh"
+
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
+[plugins]
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
+apply = ["defer"]
+
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+apply = ["defer"]
+
+[plugins.zsh-z]
+github = "agkozak/zsh-z"
+apply = ["defer"]
+
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+apply = ["defer"]
+
+[plugins.zsh-auto-notify]
+github = "MichaelAquilina/zsh-auto-notify"
+apply = ["defer"]
+
+[plugins.zsh-abbr]
+github = "olets/zsh-abbr"
+apply = ["defer"]
+
+
+[plugins.clipcopy]
+remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/lib/clipboard.zsh"
+[plugins.copyfile]
+
+remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/copyfile/copyfile.plugin.zsh"
+
+[plugins.copybuffer]
+remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/copybuffer/copybuffer.plugin.zsh"
+
+[plugins.copypath]
+remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/copypath/copypath.plugin.zsh"
+ 
