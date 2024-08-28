@@ -54,6 +54,7 @@ return {
 }
 end)
 
+config.disable_default_key_bindings = true
 -- timeout_milliseconds defaults to 1000 and can be omitted
 config.leader = { key = 'q', mods = 'ALT', timeout_milliseconds = 1000 }
 config.keys = {
@@ -84,7 +85,6 @@ config.keys = {
 
   -- { key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
   { key = 't', mods = 'CTRL', action = act.SpawnTab 'CurrentPaneDomain'}, 
-  { key = 'n', mods = 'CTRL', action = act.SpawnWindow }, 
   { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
   { key = 'o', mods = 'LEADER', action = act.EmitEvent 'toggle-opacity',},
 }
