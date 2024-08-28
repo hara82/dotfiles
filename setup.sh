@@ -1,9 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e # Exit immediately if a command exits with a non-zero status
 
 DOTFILES_DIR=~/dotfiles
 CONFIG_DIR=~/.config
+
+# Path to the shell configuration file
+SHELL_PATH_FILE="$HOME/dotfiles/zsh/zsh_settings/path.zsh"
 
 # Function to create symbolic links
 create_symlinks() {
@@ -102,10 +105,41 @@ install_brewfile_packages() {
     fi
 }
 
+# Function to ensure Homebrew-installed Git is the default Git
+setup_git_with_brew() {
+    # Check if git is installed via brew
+    if brew list --formula | grep -q "^git\$"; then
+        echo "Git is already installed via Homebrew."
+    else
+        echo "Git is not installed via Homebrew. Installing now..."
+        brew install git
+    fi
+
+    # Get the path of the Git installed via Homebrew
+    GIT_PATH=$(brew --prefix)/bin/git
+
+    # Get the current Git path
+    CURRENT_GIT_PATH=$(which git)
+
+    # Check if the current default Git is the one installed via Homebrew
+    if [ "$CURRENT_GIT_PATH" = "$GIT_PATH" ]; then
+        echo "The default Git is already the one installed via Homebrew."
+    else
+        echo -e "\nSetting the Homebrew-installed Git as the default..."
+        echo "export PATH=\"$GIT_PATH:\$PATH\"" >> "$SHELL_PATH_FILE"
+        echo "The Homebrew-installed Git has been set as the default."
+        echo "source $HOME/.zshrc or create new terminal for the changes to take effect."
+    fi
+}
+
+
 # Handle script options
 case "$1" in
     --install-homebrew)
         setup_homebrew
+        ;;
+    --switch-git-with-brew)
+        setup_git_with_brew
         ;;
     --install-packages)
         install_brewfile_packages
@@ -120,9 +154,10 @@ case "$1" in
         remove_symlinks
         create_symlinks
         setup_homebrew
+        setup_git_with_brew
         install_brewfile_packages
         ;;
     *)
-        echo "Usage: $0 --link | --unlink | --install-homebrew | --install-packages | --all"
+        echo "Usage: $0 --link | --unlink | --install-homebrew | --install-packages | --switch-git-with-brew | --all"
         ;;
 esac
