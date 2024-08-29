@@ -114,7 +114,7 @@ install_brewfile_packages() {
 # Function to ensure Homebrew-installed Git is the default Git
 setup_git_with_brew() {
     # Check if git is installed via brew
-    if brew list --formula | grep -q "^git\$"; then
+    if brew list --formula | grep "^git\$" &>/dev/null; then
         echo "Git is already installed via Homebrew."
     else
         echo "Git is not installed via Homebrew. Installing now..."
@@ -128,7 +128,7 @@ setup_git_with_brew() {
     CURRENT_GIT_PATH=$(which git)
 
     # Check if the current default Git is the one installed via Homebrew
-    if [[ "${CURRENT_GIT_PATH}" = "${GIT_PATH}" ]]; then
+    if [[ "${CURRENT_GIT_PATH}" == "${GIT_PATH}" ]]; then
         echo "The default Git is already the one installed via Homebrew."
     else
         echo -e "\nSetting the Homebrew-installed Git as the default..."
@@ -139,7 +139,7 @@ setup_git_with_brew() {
 }
 
 setup_zsh_with_brew() {
-    if brew list --formula | grep -q "^zsh\$"; then
+    if brew list --formula | grep "^zsh\$" &>/dev/null; then
         echo "zsh is already installed via Homebrew."
     else
         echo "zsh is not installed via Homebrew. Installing now..."
@@ -150,19 +150,48 @@ setup_zsh_with_brew() {
     ZSH_PATH=$(brew --prefix)/bin/zsh
 
     # Check if installed zsh is allowed as a shell, and add a line to /etc/shells.
-    if ! grep -Fxq "$ZSH_PATH" /etc/shells; then
+    if ! grep -Fxq "${ZSH_PATH}" /etc/shells; then
         echo "Adding ${ZSH_PATH} to /etc/shells"
         if [[ ! -e /etc/shells ]]; then
             echo "/etc/shells does not exist. exiting..."
             exit 1
         fi
-        echo "$ZSH_PATH" | sudo tee -a /etc/shells
+        echo "${ZSH_PATH}" | sudo tee -a /etc/shells
     fi
 
-    echo "Changing default shell to the newly installed one."
-    chsh -s "$ZSH_PATH"
-
+    if [[ "${ZSH_PATH}" == "${SHELL}" ]]; then
+        echo "Current default shell is of homebrew"
+        return
+    else
+        echo "Changing default shell to the newly installed one."
+        chsh -s "${ZSH_PATH}"
+    fi
     echo "Set zsh installed via Homebrew as the dafault shell. Create new terminal for the changes to take effect."
+}
+
+install_fonts() {
+    # TODO: specify fonts in a list. This should not be limited to Cica.
+	if fc-list | grep "Cica" &>/dev/null; then
+       echo "Cica is already installed"
+    else
+       echo "Checking whether directory to store fonts exists..."
+       if [[ ! -d /usr/local/share/fonts ]]; then
+           echo "/usr/local/share/fonts does not exist. exiting..."
+           exit 1
+       fi
+       echo "Donwloading Cica"
+       curl -L -O https://github.com/miiton/Cica/releases/download/v5.0.3/Cica_v5.0.3.zip
+       unzip Cica_v5.0.3.zip -d Cica
+       sudo mv Cica /usr/local/share/fonts
+       sudo fc-cache -fv
+       if fc-list | grep -q Cica; then
+           echo "Cica has successfully installed."
+           rm Cica_v5.0.3.zip
+       else
+           echo "ERROR: Cica has not been installed."
+           exit 1
+       fi
+   fi
 }
 
 # Handle script options
@@ -185,15 +214,18 @@ case "$1" in
 --unlink)
     remove_symlinks
     ;;
+--install-fonts)
+    install_fonts
+    ;;
 --all)
     remove_symlinks
     create_symlinks
     setup_homebrew
-    setup_git_with_brew
     setup_zsh_with_brew
     install_brewfile_packages
+    setup_git_with_brew # TODO: The operation stops when this one is put right after setup_homebrew.
     ;;
 *)
-    echo "Usage: $0 --link | --unlink | --install-homebrew | --install-packages | --switch-git-with-brew | --all"
+    echo "Usage: $0 --link | --unlink | --install-homebrew | --install-packages | --install-fonts | --switch-git-with-brew | --switch-zsh-with-brew | --all"
     ;;
 esac
