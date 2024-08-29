@@ -83,10 +83,11 @@ config.keys = {
 
   { key = "f", mods = "LEADER", action = act.ToggleFullScreen },
 
-  -- { key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+  { key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
   { key = 't', mods = 'CTRL', action = act.SpawnTab 'CurrentPaneDomain'}, 
   { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
-  { key = 'o', mods = 'LEADER', action = act.EmitEvent 'toggle-opacity',},
+  { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
+  { key = 'o', mods = 'LEADER', action = act.EmitEvent 'toggle-opacity'},
 }
 
 config.key_tables = {
