@@ -50,6 +50,10 @@ apply = ["defer"]
 remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/lib/clipboard.zsh"
 apply = ["defer"]
 
+[plugins.ohmyzsh-lib-functions]
+remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/lib/functions.zsh"
+apply = ["defer"]
+
 [plugins.copyfile]
 remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/copyfile/copyfile.plugin.zsh"
 apply = ["defer"]
@@ -64,6 +68,10 @@ apply = ["defer"]
 
 [plugins.command-not-found]
 remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/command-not-found/command-not-found.plugin.zsh"
+apply = ["defer"]
+
+[plugins.web-search]
+remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/web-search/web-search.plugin.zsh"
 apply = ["defer"]
 
 [plugins.local-settings]
