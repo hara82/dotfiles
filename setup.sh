@@ -224,6 +224,7 @@ case "$1" in
     setup_zsh_with_brew
     install_brewfile_packages
     setup_git_with_brew # TODO: The operation stops when this one is put right after setup_homebrew.
+    install_fonts
     ;;
 *)
     echo "Usage: $0 --link | --unlink | --install-homebrew | --install-packages | --install-fonts | --switch-git-with-brew | --switch-zsh-with-brew | --all"
