@@ -93,7 +93,8 @@ setup_homebrew() {
     fi
 
     # Add Homebrew to the PATH
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+    test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     echo "Homebrew setup is complete."
 }
 
@@ -137,6 +138,33 @@ setup_git_with_brew() {
     fi
 }
 
+setup_zsh_with_brew() {
+    if brew list --formula | grep -q "^zsh\$"; then
+        echo "zsh is already installed via Homebrew."
+    else
+        echo "zsh is not installed via Homebrew. Installing now..."
+        brew install zsh
+    fi
+
+    # Get the path of the zsh installed via Homebrew
+    ZSH_PATH=$(brew --prefix)/bin/zsh
+
+    # Check if installed zsh is allowed as a shell, and add a line to /etc/shells.
+    if ! grep -Fxq "$ZSH_PATH" /etc/shells; then
+        echo "Adding ${ZSH_PATH} to /etc/shells"
+        if [[ ! -e /etc/shells ]]; then
+            echo "/etc/shells does not exist. exiting..."
+            exit 1
+        fi
+        echo "$ZSH_PATH" | sudo tee -a /etc/shells
+    fi
+
+    echo "Changing default shell to the newly installed one."
+    chsh -s "$ZSH_PATH"
+
+    echo "Set zsh installed via Homebrew as the dafault shell. Create new terminal for the changes to take effect."
+}
+
 # Handle script options
 case "$1" in
 --install-homebrew)
@@ -144,6 +172,9 @@ case "$1" in
     ;;
 --switch-git-with-brew)
     setup_git_with_brew
+    ;;
+--switch-zsh-with-brew)
+    setup_zsh_with_brew
     ;;
 --install-packages)
     install_brewfile_packages
@@ -159,6 +190,7 @@ case "$1" in
     create_symlinks
     setup_homebrew
     setup_git_with_brew
+    setup_zsh_with_brew
     install_brewfile_packages
     ;;
 *)
