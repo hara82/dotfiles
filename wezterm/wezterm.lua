@@ -88,6 +88,9 @@ config.keys = {
   { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
   { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
   { key = 'o', mods = 'LEADER', action = act.EmitEvent 'toggle-opacity'},
+  { key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
+  { key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
+
 }
 
 config.key_tables = {
