@@ -5,7 +5,7 @@ local act = wezterm.action
 
 local opacity = 0.98
 
-config.color_scheme = 'Japanesque'
+config.color_scheme = 'zenbones_dark'
 config.tab_bar_at_bottom = true
 -- config.hide_tab_bar_if_only_one_tab = false
 
