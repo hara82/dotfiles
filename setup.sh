@@ -90,8 +90,8 @@ setup_homebrew() {
         local missing_packages=()
 
         for package in "${required_packages[@]}"; do
-            if ! dpkg -l | grep -q "^ii  $package"; then
-                missing_packages+=("$package")
+            if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed"; then
+            missing_packages+=("$package")
             fi
         done
 
