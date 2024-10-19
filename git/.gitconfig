@@ -2,3 +2,15 @@
     path = ~/dotfiles/git/user.conf
 [core]
 	editor = vim
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Ryosuke Hara
+	email = 92095956+hara82@users.noreply.github.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
