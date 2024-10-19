@@ -84,12 +84,27 @@ setup_homebrew() {
         echo "Homebrew is already installed."
     else
         echo "Homebrew is not installed. Installing Homebrew..."
-        if ! command -v curl &>/dev/null; then
-            echo "curl is not installed. Please install curl."
-            exit 1
+        
+        # Check for required dependencies
+        local required_packages=("build-essential" "procps" "curl" "file" "git")
+        local missing_packages=()
+
+        for package in "${required_packages[@]}"; do
+            if ! dpkg -l | grep -q "^ii  $package"; then
+                missing_packages+=("$package")
+            fi
+        done
+
+        if [[ ${#missing_packages[@]} -ne 0 ]]; then
+            echo "The following packages are missing and will be installed: ${missing_packages[*]}"
+            sudo apt update
+            sudo apt install -y "${missing_packages[@]}"
         else
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        fi 
+            echo "All required dependencies are already installed."
+        fi
+
+        # Install Homebrew
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 
     # Add Homebrew to the PATH
