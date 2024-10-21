@@ -37,9 +37,9 @@ apply = ["defer"]
 github = "zsh-users/zsh-history-substring-search"
 apply = ["defer"]
 
-[plugins.zsh-auto-notify]
-github = "MichaelAquilina/zsh-auto-notify"
-apply = ["defer"]
+# [plugins.zsh-auto-notify]
+# github = "MichaelAquilina/zsh-auto-notify"
+# apply = ["defer"]
 
 [plugins.zsh-abbrev-alias]
 github = "momo-lab/zsh-abbrev-alias"
