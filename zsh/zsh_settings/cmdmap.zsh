@@ -13,5 +13,6 @@ abbr gs="git status"
 abbr ggl="google"
 
 # Enable Delete key
+# https://superuser.com/questions/169920/binding-fn-delete-in-zsh-on-mac-os-x
 bindkey "^[[3~" delete-char
 
