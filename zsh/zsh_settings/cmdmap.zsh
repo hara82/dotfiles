@@ -11,3 +11,7 @@ abbr -r dc="d container"
 abbr gc="git commit"
 abbr gs="git status"
 abbr ggl="google"
+
+# Enable Delete key
+bindkey "^[[3~" delete-char
+
