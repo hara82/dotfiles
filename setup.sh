@@ -207,6 +207,9 @@ install_fonts() {
            exit 1
        fi
    fi
+# TODO: install Times New Roman.
+# sudo apt-get update
+# sudo apt-get install ttf-mscorefonts-installer
 }
 
 # Handle script options
