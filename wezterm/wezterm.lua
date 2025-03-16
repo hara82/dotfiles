@@ -9,10 +9,10 @@ config.color_scheme = 'zenbones_dark'
 config.tab_bar_at_bottom = true
 -- config.hide_tab_bar_if_only_one_tab = false
 
-config.font = wezterm.font_with_fallback{
-    { family = "Cica", weight = 'Regular'},
-    "JetBrains Mono",
-}
+-- config.font = wezterm.font_with_fallback{
+--     { family = "Cica", weight = 'Regular'},
+--     "JetBrains Mono",
+-- }
 config.font_size = 13.0
 
 config.window_background_opacity = opacity

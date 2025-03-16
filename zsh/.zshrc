@@ -1,5 +1,5 @@
 # Enable linuxbrew, sheldon, starship, fzf(zsh plugin)
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
 source <(fzf --zsh)
