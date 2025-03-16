@@ -54,7 +54,7 @@ return {
 }
 end)
 
-config.disable_default_key_bindings = true
+config.disable_default_key_bindings = false
 -- timeout_milliseconds defaults to 1000 and can be omitted
 config.leader = { key = 'q', mods = 'ALT', timeout_milliseconds = 1000 }
 config.keys = {
@@ -94,6 +94,9 @@ config.keys = {
   { key = '-', mods = 'CMD', action = wezterm.action.DecreaseFontSize },
   { key = '0', mods = 'CMD', action = wezterm.action.ResetFontSize },
 
+  { key = 'm', mods = 'CMD', action = wezterm.action.Hide },
+  { key = 'h', mods = 'CMD', action = wezterm.action.HideApplication },
+  { key = 'r', mods = 'CMD', action = wezterm.action.ReloadConfiguration },
 }
 
 config.key_tables = {
