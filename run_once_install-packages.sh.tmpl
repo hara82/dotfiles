@@ -1,0 +1,10 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+set -euo pipefail
+
+echo "Installing packages for macOS..."
+
+brew bundle --global
+echo "Homebrew setup complete."
+
+{{ end -}}
