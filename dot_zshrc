@@ -32,6 +32,10 @@ SAVEHIST=10000
 autoload -Uz compinit
 compinit
 
+# Enable Delete key
+# https://superuser.com/questions/169920/binding-fn-delete-in-zsh-on-mac-os-x
+bindkey "^[[3~" delete-char
+
 # >>> juliaup initialize >>>
 
 # !! Contents within this block are managed by juliaup !!

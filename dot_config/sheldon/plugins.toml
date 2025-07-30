@@ -75,6 +75,6 @@ remote = "https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/web-search/web-s
 apply = ["defer"]
 
 [plugins.local-settings]
-local = "~/dotfiles/zsh/zsh_settings"
+local = "~/.config/zsh"
 apply = ["defer"]
  
