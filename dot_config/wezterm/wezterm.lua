@@ -9,10 +9,10 @@ config.color_scheme = 'zenbones_dark'
 config.tab_bar_at_bottom = true
 -- config.hide_tab_bar_if_only_one_tab = false
 
-config.font = wezterm.font_with_fallback{
-    { family = "Cica", weight = 'Regular'},
-    "JetBrains Mono",
-}
+-- config.font = wezterm.font_with_fallback{
+--     { family = "Cica", weight = 'Regular'},
+--     "JetBrains Mono",
+-- }
 config.font_size = 13.0
 
 config.window_background_opacity = opacity
@@ -54,7 +54,7 @@ return {
 }
 end)
 
-config.disable_default_key_bindings = true
+config.disable_default_key_bindings = false
 -- timeout_milliseconds defaults to 1000 and can be omitted
 config.leader = { key = 'q', mods = 'ALT', timeout_milliseconds = 1000 }
 config.keys = {
@@ -83,14 +83,20 @@ config.keys = {
 
   { key = "f", mods = "LEADER", action = act.ToggleFullScreen },
 
-  { key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
-  { key = 't', mods = 'CTRL', action = act.SpawnTab 'CurrentPaneDomain'}, 
-  { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
-  { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
+  { key = "x", mods = "CMD", action = act.ActivateCopyMode },
+  { key = 't', mods = 'CMD', action = act.SpawnTab 'CurrentPaneDomain'}, 
+  { key = 'n', mods = 'CMD', action = act.SpawnWindow}, 
+  { key = 'w', mods = 'CMD', action = act.CloseCurrentTab{confirm=true}},
+  { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+  { key = "c", mods = "CMD", action = act.CopyTo("Clipboard") },
   { key = 'o', mods = 'LEADER', action = act.EmitEvent 'toggle-opacity'},
-  { key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
-  { key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
+  { key = '=', mods = 'CMD', action = wezterm.action.IncreaseFontSize },
+  { key = '-', mods = 'CMD', action = wezterm.action.DecreaseFontSize },
+  { key = '0', mods = 'CMD', action = wezterm.action.ResetFontSize },
 
+  { key = 'm', mods = 'CMD', action = wezterm.action.Hide },
+  { key = 'h', mods = 'CMD', action = wezterm.action.HideApplication },
+  { key = 'r', mods = 'CMD', action = wezterm.action.ReloadConfiguration },
 }
 
 config.key_tables = {

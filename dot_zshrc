@@ -1,5 +1,5 @@
 # Enable linuxbrew, sheldon, starship, fzf(zsh plugin)
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
 source <(fzf --zsh)
@@ -31,3 +31,16 @@ SAVEHIST=10000
 # Use modern completion system
 autoload -Uz compinit
 compinit
+
+# Enable Delete key
+# https://superuser.com/questions/169920/binding-fn-delete-in-zsh-on-mac-os-x
+bindkey "^[[3~" delete-char
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/Users/hara/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
