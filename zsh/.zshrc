@@ -31,3 +31,12 @@ SAVEHIST=10000
 # Use modern completion system
 autoload -Uz compinit
 compinit
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/Users/hara/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<

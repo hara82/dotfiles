@@ -3,6 +3,7 @@ alias cat="bat --style=plain"
 # alias tree="eza -T"
 alias abbr="abbrev-alias"
 alias imgcat="wezterm imgcat"
+alias matlab="/Applications/MATLAB_R*/bin/matlab"
 
 abbr up="cd .."
 abbr d="docker"
