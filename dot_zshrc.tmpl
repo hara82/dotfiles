@@ -1,7 +1,10 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# Enable linuxbrew, sheldon, starship, fzf(zsh plugin)
-# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{- if eq .chezmoi.os "linux" }}
+# Enable linuxbrew if on Linux, using chezmoi template
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{ end }}
+
 eval "$(sheldon source)"
 eval "$(starship init zsh)"
 source <(fzf --zsh)
