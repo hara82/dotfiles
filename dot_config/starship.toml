@@ -25,7 +25,9 @@ $conda\
 [](fg:color_bg3 bg:color_bg1)\
 $time\
 [ ](fg:color_bg1)\
-$line_break$character"""
+$line_break\
+${custom.anime_worktree}\
+$character"""
 
 palette = 'gruvbox_dark'
 
@@ -166,3 +168,17 @@ vimcmd_symbol = '[](bold fg:color_green)'
 vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
 vimcmd_replace_symbol = '[](bold fg:color_purple)'
 vimcmd_visual_symbol = '[](bold fg:color_yellow)'
+[custom.anime_worktree]
+# shellのcase文でディレクトリ名を判定してアイコンと名前を出力
+command = """
+name=$(basename $(git rev-parse --show-toplevel 2>/dev/null))
+case $name in
+  amuro) printf '🥃A' ;;
+  loid)  printf '🦉L' ;;
+  toji)  printf '🦍T' ;;
+esac
+"""
+# Gitリポジトリ内にいるときだけ実行
+when = "git rev-parse --is-inside-work-tree"
+# Gruvboxのイエローを使って太字で表示
+format = "[ $output ](bold fg:color_yellow)"
